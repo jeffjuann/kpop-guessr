@@ -1,0 +1,47 @@
+.input
+{
+    padding: 12px;
+    border-radius: 8px;
+    border: #4C4F5C 1px solid;
+    color: #181818;
+    background-color: #F5F5F5;
+}
+
+.input:hover
+{
+  background-color: #F5F5F5;
+}
+
+.input:focus
+{
+  border: #4C4F5C 1px solid;
+}
+
+.inputSuggestion
+{
+  background-color: #FFFFFF;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.suggestionItem
+{
+  padding: 12px;
+  border-bottom: #000000 solid 1px;
+  cursor: pointer;
+  border: 1px solid #d4d4d4;
+}
+
+.suggestionItemActive
+{
+  padding: 12px;
+  border-bottom: #000000 solid 1px;
+  cursor: pointer;
+  border: 1px solid #D9D9D9;
+  background-color: #D9D9D9;
+}
+
+.suggestionItem:hover
+{
+  background-color: #D9D9D9; 
+}
