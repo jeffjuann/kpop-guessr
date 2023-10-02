@@ -21,6 +21,11 @@ export default function Input({ idols, onSubmit }: { idols: any[], onSubmit: Fun
 
   const clickEnter = () =>
   {
+    setSearch({
+      _id: null,
+      name: '',
+      group: '',
+    });
     onSubmit(search._id);
   }
 
@@ -42,12 +47,10 @@ export default function Input({ idols, onSubmit }: { idols: any[], onSubmit: Fun
     {  
       setCursorIndex(c => (c < suggestions.length - 1 ? c + 1 : c))
     }
-
     if (event.key === "ArrowUp")
     {
       setCursorIndex(c => (c > 0 ? c - 1 : 0));
     }
-
     if (event.key === "Enter" && cursorIndex >= -1 && suggestions.length === 1)
     {
       setSearch(suggestions[0]);
@@ -63,58 +66,60 @@ export default function Input({ idols, onSubmit }: { idols: any[], onSubmit: Fun
       // if(search._id !== null) checkAnswer(search._id, guess_id);
       setVisibility(false);
     }
-    console.log(suggestions.length);
   };
 
   return (
-    <div className={inputStyles.inputContainer}>
-      <input
-          className={inputStyles.input}
-          type='text' 
-          id="name" 
-          autoComplete='off'
-          value={search.name}
-          placeholder='Input Name'
-          onChange={(e) =>
+    <div className={inputStyles.container}>
+      <div className={inputStyles.inputContainer}>
+        <input
+            className={inputStyles.input}
+            type='text' 
+            id="name" 
+            autoComplete='off'
+            value={search.name}
+            placeholder='Input Name'
+            onChange={(e) =>
+            {
+                setCursorIndex(0);
+                if(e.target.value !== '') setVisibility(true);
+                setSearch({ ...search, name: e.target.value});
+            }}
+            onKeyDown={(e) =>
+            {
+                keyboardNavigation(e)
+            }}
+        />
+        { 
+          isVisible ? 
+          <div className={suggestionsStyles.suggestionContainer}>
           {
-              setCursorIndex(0);
-              if(e.target.value !== '') setVisibility(true);
-              setSearch({ ...search, name: e.target.value});
+            suggestions
+            .map((idol: searchProps, index: number) =>
+            {
+                return (
+                <div 
+                    key={index} 
+                    onClick={() =>
+                    {
+                        setSearch(suggestions[index]);
+                        // clickEnter()
+                        // if(search._id !== null) checkAnswer(search._id, guess_id);
+                        setVisibility(false);
+                    }} 
+                    className={cursorIndex === index ? suggestionsStyles.suggestionItemActive : suggestionsStyles.suggestionItem}
+                >
+                    <h3>{idol.name}</h3>
+                    <h5>{idol.group}</h5>
+                </div>
+                )
+            } 
+            )
           }
-          }
-          onKeyDown={(e) =>
-          {
-              keyboardNavigation(e)
-          }
-          }
-      />
-      { isVisible ? 
-        <div className={inputStyles.inputSuggestion}>
-        {
-          suggestions
-          .map((idol: searchProps, index: number) =>
-          {
-              return (
-              <div 
-                  key={index} 
-                  onClick={() =>
-                  {
-                      setSearch({ ...search, name: idol.name});
-                      // clickEnter()
-                      // if(search._id !== null) checkAnswer(search._id, guess_id);
-                      setVisibility(false);
-                  }} 
-                  className={cursorIndex === index ? inputStyles.suggestionItemActive : inputStyles.suggestionItem}
-              >
-                  <h3>{idol.name}</h3>
-                  <h5>{idol.group}</h5>
-              </div>
-              )
-          } 
-          )
+          </div> 
+          : null
         }
-      </div> : null}
-      <button onClick={() => clickEnter()}>Check</button>
+      </div>
+      <button className={inputStyles.checkButton} onClick={() => clickEnter()}>CHECK</button>
     </div>
   )
 }

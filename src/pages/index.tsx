@@ -15,19 +15,21 @@ import styles from '@/styles/Home.module.css';
 import gameStyles from '@/styles/Game.module.css';
 import { ObjectId } from 'mongodb';
 import { useRouter } from 'next/router';
+import { GetServerSideProps } from 'next';
 
 const inter = Inter({ subsets: ['latin'] })
 
 const hostname = 'http://localhost:3000';
 // const hostname = typeof window !== 'undefined' && window.location.hostname ? ( 'http://' + window.location.hostname ) : 'undefined';
 
-function checkSearch(guess_id: ObjectId, search_id: ObjectId): guessProps
+async function checkSearch(guess_id: ObjectId, search_id: ObjectId): Promise<guessProps>
 {
-  return axios.get(`${hostname}/api/game?guess_id=${guess_id}&search_id=${search_id}`)
+  const res = await axios.get(`${hostname}/api/game?guess_id=${guess_id}&search_id=${search_id}`)
   .then((response) =>
   {
     return response.data;
   })
+  return res; 
 }
 
 function refreshPage() {
@@ -40,35 +42,46 @@ function win()
   alert("Congratulations, You Win!!!");
 }
 
-export default function Home()
+export async function getServerSideProps()
+{
+  const idols = await axios.get(`${hostname}/api/idols`)
+  .then((response) =>
+  {
+    return (response.data)
+  }).catch((err) =>
+  {
+    console.log(err)
+  });
+  const guess_id = await axios.get(`${hostname}/api/game`)
+  .then((response) =>
+  {
+    return (response.data[0]._id);
+  }).catch((err) =>
+  {
+    console.log(err)
+  })
+
+  return {
+    props: {
+      idols: idols,
+      guess_id: guess_id,
+    }
+  } 
+}
+
+export default function Home({ idols, guess_id}: { idols: searchProps[], guess_id: ObjectId})
 {
 
   const [ initial, setInitial ] = useState<boolean>(true);
-  
-  const [ idols, setIdols ] = useState<searchProps[]>([]);
+  const [ isLoading, setIsLoading ] = useState<boolean>(true);
+
+  // const [ idols, setIdols ] = useState<searchProps[]>([]);
   const [ guesses, setGuesses ] = useState<guessProps[]>([]);
-  const [ guess_id, setGuess_id ] = useState<ObjectId | null>(null);
+  // const [ guess_id, setGuess_id ] = useState<ObjectId | null>(null);
 
   useEffect(() => {
     if(initial === true)
     {
-      axios.get(`${hostname}/api/idols`)
-      .then((response) =>
-      {
-        setIdols(response.data)
-      }).catch((err) =>
-      {
-        console.log(err)
-      });
-
-      axios.get(`${hostname}/api/game`)
-      .then((response) =>
-      {
-        setGuess_id(response.data[0]._id);
-      }).catch((err) =>
-      {
-        console.log(err)
-      })
       setInitial(false);
     }
     else
@@ -90,8 +103,6 @@ export default function Home()
     {
       const newGuess = await checkSearch(guess_id, search_id);
       setGuesses([ newGuess, ...guesses])
-      console.log("GUESSES");
-      console.log(guesses);
     }
 
   }
@@ -106,7 +117,7 @@ export default function Home()
       </Head>
       
       <main className={`${styles.main} ${inter.className}`}>
-        <h1>{hostname}</h1>
+        <h1>{"KPOP-GUESSR"}</h1>
         <div className={`${gameStyles.container}`}>
           <Guesses guesses={guesses}/>
           <Input idols={idols} onSubmit={handleSubmit}/>
