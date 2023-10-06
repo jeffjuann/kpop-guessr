@@ -23,6 +23,8 @@ const inter = Inter({ subsets: ['latin'] })
 
 const URL: string = process.env.VERCEL_URL ?? '';
 
+const URLTESTING: string = `${URL}`;
+
 async function checkSearch(guess_id: ObjectId, search_id: ObjectId): Promise<guessProps>
 {
   const res = await axios.get(`${URL}/api/game?guess_id=${guess_id}&search_id=${search_id}`)
@@ -44,9 +46,9 @@ function win()
   alert("Congratulations, You Win!!!");
 }
 
-export default function Home({ idols, guess_id, err}: { idols: searchProps[], guess_id: ObjectId, err: any})
+export default function Home({ idols, guess_id }: { idols: searchProps[], guess_id: ObjectId })
 {
-  console.log(err);
+  console.log(URLTESTING);
   const [ initial, setInitial ] = useState<boolean>(true);
   const [ isLoading, setIsLoading ] = useState<boolean>(true);
   const [ guesses, setGuesses ] = useState<guessProps[]>([]);
