@@ -2,7 +2,7 @@ import cardStyles from '@/styles/Guess/Card.module.css';
 import { guessProps } from '@/types';
 import { Textfit } from 'react-textfit';
 
-function Clue({ category, value, isMatch }: { category: string, value: string, isMatch: boolean})
+function Clue({ category, value, isMatch }: { category: string, value: string | number, isMatch: boolean})
 {
   return (
     <div className={`${cardStyles.clueContainer}`}>
