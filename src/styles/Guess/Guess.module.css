@@ -7,8 +7,6 @@
     background-color: #FFFFFF;
     color: #000000;
     border-radius: 8px;
-    min-width: 552.13px;
-    max-width: 552.13px;
 }
 
 .guessList
@@ -20,4 +18,20 @@
     min-height: 100px;
     gap: 16px;
     font-style: italic;
+}
+
+@media only screen and (min-width:800px)
+{
+    .container
+    {
+        width: 553px;
+    }
+}
+
+  @media only screen and (max-width:800px)
+{
+    .container
+    {
+        max-width: 100vw;
+    }
 }
