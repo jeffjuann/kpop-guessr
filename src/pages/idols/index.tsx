@@ -66,7 +66,7 @@ export default function Home({ idols }: { idols: idolProps[]})
   )
 }
 
-const URL: string = process.env.BASE_URL ?? '';
+const URL: string = process.env.VERCEL_URL ?? '';
 
 export async function getServerSideProps(context: any)
 {

@@ -46,6 +46,8 @@ function win()
 
 export default function Home({ idols, guess_id}: { idols: searchProps[], guess_id: ObjectId})
 {
+
+  console.log(URL);
   const [ initial, setInitial ] = useState<boolean>(true);
   const [ isLoading, setIsLoading ] = useState<boolean>(true);
   const [ guesses, setGuesses ] = useState<guessProps[]>([]);
@@ -105,7 +107,6 @@ export default function Home({ idols, guess_id}: { idols: searchProps[], guess_i
         </Dialog.Portal>
       </Dialog.Root>
         <h1>{"KPOP-GUESSR"}</h1>
-        <h1>{URL}</h1>
         <div className={`${gameStyles.container}`}>
           <Guesses guesses={guesses}/>
           <Input idols={idols} onSubmit={handleSubmit}/>
