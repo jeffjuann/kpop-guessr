@@ -44,10 +44,9 @@ function win()
   alert("Congratulations, You Win!!!");
 }
 
-export default function Home({ idols, guess_id}: { idols: searchProps[], guess_id: ObjectId})
+export default function Home({ idols, guess_id, err}: { idols: searchProps[], guess_id: ObjectId, err: any})
 {
-
-  console.log(URL);
+  console.log(err);
   const [ initial, setInitial ] = useState<boolean>(true);
   const [ isLoading, setIsLoading ] = useState<boolean>(true);
   const [ guesses, setGuesses ] = useState<guessProps[]>([]);
