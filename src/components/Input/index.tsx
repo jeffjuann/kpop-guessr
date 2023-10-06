@@ -19,14 +19,14 @@ export default function Input({ idols, onSubmit }: { idols: any[], onSubmit: Fun
     group: '',
   });
 
-  const clickEnter = () =>
+  function clickEnter()
   {
+    onSubmit(search._id);
     setSearch({
       _id: null,
       name: '',
       group: '',
     });
-    onSubmit(search._id);
   }
 
   const [ isVisible, setVisibility ] = useState<boolean>(false);
@@ -54,16 +54,14 @@ export default function Input({ idols, onSubmit }: { idols: any[], onSubmit: Fun
     if (event.key === "Enter" && cursorIndex >= -1 && suggestions.length === 1)
     {
       setSearch(suggestions[0]);
-      // clickEnter();
-      // if(search._id !== null) checkAnswer(search._id, guess_id);
+      // if(search._id !== null) clickEnter();
       setVisibility(false);
 
     }
     if (event.key === "Enter" && cursorIndex >= 0 && suggestions.length > 1)
     {
       setSearch(suggestions[cursorIndex]);
-      // clickEnter()
-      // if(search._id !== null) checkAnswer(search._id, guess_id);
+      // if(search._id !== null) clickEnter();
       setVisibility(false);
     }
   };
@@ -102,8 +100,7 @@ export default function Input({ idols, onSubmit }: { idols: any[], onSubmit: Fun
                     onClick={() =>
                     {
                         setSearch(suggestions[index]);
-                        // clickEnter()
-                        // if(search._id !== null) checkAnswer(search._id, guess_id);
+                        // if(search._id !== null) clickEnter();
                         setVisibility(false);
                     }} 
                     className={cursorIndex === index ? suggestionsStyles.suggestionItemActive : suggestionsStyles.suggestionItem}

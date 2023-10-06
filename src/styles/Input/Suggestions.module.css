@@ -26,7 +26,8 @@
 .suggestionItem
 {
   padding: 4px;
-  border-bottom: #000000 solid 1px;
+  border-top: #F5F5F5 solid 1px;
+  border-bottom: #F5F5F5 solid 1px;
   cursor: pointer;
   border: 1px solid #F5F5F5;
 }
@@ -40,9 +41,9 @@
 .suggestionItemActive
 {
   padding: 4px;
-  border-bottom: #000000 solid 1px;
+  border-top: #F5F5F5 solid 1px;
+  border-bottom: #F5F5F5 solid 1px;
   cursor: pointer;
-  border: 1px solid #F5F5F5;
   background-color: #67ade2;
 }
 

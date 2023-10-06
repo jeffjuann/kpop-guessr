@@ -5,6 +5,9 @@ import Guesses from '@/components/Guess';
 import Input from '@/components/Input';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import * as Dialog from '@radix-ui/react-dialog';
+import { Cross2Icon, QuestionMarkIcon } from '@radix-ui/react-icons';
+
 
 // TYPES
 import { guessProps, searchProps } from '@/types';
@@ -14,6 +17,7 @@ import { ObjectId } from 'mongodb';
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css';
 import gameStyles from '@/styles/Game.module.css';
+import helpStyles from '@/styles/Help/Help.module.css';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -80,6 +84,26 @@ export default function Home({ idols, guess_id}: { idols: searchProps[], guess_i
       </Head>
       
       <main className={`${styles.main} ${inter.className}`}>
+      <Dialog.Root>
+        <Dialog.Trigger asChild>
+          <button className={`${helpStyles.Button}`}><QuestionMarkIcon/></button>
+        </Dialog.Trigger>
+        <Dialog.Portal>
+          <Dialog.Overlay className={`${helpStyles.DialogOverlay}`}/>
+          <Dialog.Content className={`${helpStyles.DialogContent}`}>
+            <Dialog.Title className={`${helpStyles.DialogTitle} ${inter.className}`}>How To Play</Dialog.Title>
+            <Dialog.Description className={`${helpStyles.DialogDescription} ${inter.className}`}>
+              Make a random opening guess. After each guess, feedback will be revealed and 
+              show you the matched clue of the idol. You win after all clue matched.
+            </Dialog.Description>
+            <Dialog.Close asChild>
+              <button className={`${helpStyles.IconButton}`} aria-label="Close">
+                <Cross2Icon />
+              </button>
+            </Dialog.Close>
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog.Root>
         <h1>{"KPOP-GUESSR"}</h1>
         {/* <h1>{URL}</h1> */}
         <div className={`${gameStyles.container}`}>

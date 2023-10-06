@@ -6,7 +6,7 @@ function Clue({ category, value, isMatch }: { category: string, value: string | 
 {
   return (
     <div className={`${cardStyles.clueContainer}`}>
-      <Textfit mode="single" style={{ maxWidth: 52, fontWeight: 'bold'}}>{category}</Textfit>
+      <Textfit mode="single" style={{ maxWidth: 52}}>{category}</Textfit>
       <div className={`${cardStyles.clue}`} style={{ backgroundColor: ( isMatch ? '#22C55E' : '#94A3B8')}}>
         <Textfit mode="single" style={{ maxWidth: 40}} max={12}>
           {value}
