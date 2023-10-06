@@ -6,5 +6,8 @@ Kpop Idol Guessing Game
 - Each Idol have a property as a clue to be guessed.
 - When the propery matched, it will turn greed indicate the clue.
 
+## Documentation
+![Game](screenshots/Game.jpg)
 
+![HowToPlay](screenshots/Help.jpg)
 
