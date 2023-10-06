@@ -15,13 +15,13 @@ export default function Guess({ guesses }:{ guesses: guessProps[]})
             if(index === 0)
             {
               return (
-                <Card guess={guessItem} animated/>
+                <Card guess={guessItem} animated key={index}/>
               )
             }
             else
             {
               return (
-                <Card guess={guessItem} />
+                <Card guess={guessItem} key={index} />
               )
             }
           } 
