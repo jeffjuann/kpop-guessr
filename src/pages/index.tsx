@@ -48,7 +48,7 @@ function win()
 
 export default function Home({ idols, guess_id }: { idols: searchProps[], guess_id: ObjectId })
 {
-  console.log(URLTESTING);
+  console.log(`${URLTESTING} is the URL`);
   const [ initial, setInitial ] = useState<boolean>(true);
   const [ isLoading, setIsLoading ] = useState<boolean>(true);
   const [ guesses, setGuesses ] = useState<guessProps[]>([]);
