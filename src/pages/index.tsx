@@ -105,7 +105,7 @@ export default function Home({ idols, guess_id}: { idols: searchProps[], guess_i
         </Dialog.Portal>
       </Dialog.Root>
         <h1>{"KPOP-GUESSR"}</h1>
-        {/* <h1>{URL}</h1> */}
+        <h1>{URL}</h1>
         <div className={`${gameStyles.container}`}>
           <Guesses guesses={guesses}/>
           <Input idols={idols} onSubmit={handleSubmit}/>
