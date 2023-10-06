@@ -24,7 +24,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 async function checkSearch(guess_id: ObjectId, search_id: ObjectId): Promise<guessProps>
 {
-  const res = await axios.get(`${process.env.VERCEL_URL}/api/game?guess_id=${guess_id}&search_id=${search_id}`)
+  const res = await axios.get(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/game?guess_id=${guess_id}&search_id=${search_id}`)
   .then((response) =>
   {
     return response.data;
@@ -115,7 +115,7 @@ export default function Home({ idols, guess_id }: { idols: searchProps[], guess_
 
 export async function getServerSideProps(context: any)
 {
-  const idols = await axios.get(`${process.env.VERCEL_URL}/api/idols`)
+  const idols = await axios.get(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/idols`)
   .then((response) =>
   {
     return (response.data)
@@ -129,7 +129,7 @@ export async function getServerSideProps(context: any)
     }
   });
 
-  const guess_id = await axios.get(`${process.env.VERCEL_URL}/api/game`)
+  const guess_id = await axios.get(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/game`)
   .then((response) =>
   {
     return (response.data[0]._id);

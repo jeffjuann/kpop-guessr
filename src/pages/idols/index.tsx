@@ -69,7 +69,7 @@ export default function Home({ idols }: { idols: idolProps[]})
 
 export async function getServerSideProps(context: any)
 {
-  const idols = await axios.get(`${process.env.VERCEL_URL}/api/idols?all=true`)
+  const idols = await axios.get(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/idols?all=true`)
   .then((response) =>
   {
     return (response.data)

@@ -2,7 +2,7 @@ import { guessProps, idolProps } from "@/types";
 import { MongoClient, ObjectId, ServerApiVersion } from "mongodb";
 import { NextApiRequest, NextApiResponse } from "next";
 
-const uri: string = process.env.DB_URI ?? '';
+const uri: string = process.env.NEXT_PUBLIC_DB_URI ?? '';
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
   serverApi: {
