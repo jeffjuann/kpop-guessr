@@ -17,8 +17,7 @@ import gameStyles from '@/styles/Game.module.css';
 
 const inter = Inter({ subsets: ['latin'] })
 
-// const URL = 'http://localhost:3000'; 
-const URL = "https://1hf9sbc2-3000.asse.devtunnels.ms/"; // Port Forward URL
+const URL: string = process.env.BASE_URL ?? '';
 
 async function checkSearch(guess_id: ObjectId, search_id: ObjectId): Promise<guessProps>
 {

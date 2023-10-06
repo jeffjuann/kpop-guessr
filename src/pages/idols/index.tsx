@@ -15,9 +15,7 @@ import { table } from 'console';
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home({ idols }: { idols: idolProps[]})
-{
-  console.log(idols)
-  
+{ 
   return (
     <>
       <Head>
@@ -68,8 +66,7 @@ export default function Home({ idols }: { idols: idolProps[]})
   )
 }
 
-// const URL = 'http://localhost:3000'; 
-const URL = "https://1hf9sbc2-3000.asse.devtunnels.ms/"; // Port Forward URL
+const URL: string = process.env.BASE_URL ?? '';
 
 export async function getServerSideProps(context: any)
 {
