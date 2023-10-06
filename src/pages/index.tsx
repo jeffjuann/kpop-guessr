@@ -21,7 +21,7 @@ import helpStyles from '@/styles/Help/Help.module.css';
 
 const inter = Inter({ subsets: ['latin'] })
 
-const URL: string = process.env.BASE_URL ?? '';
+const URL: string = process.env.VERCEL_URL ?? '';
 
 async function checkSearch(guess_id: ObjectId, search_id: ObjectId): Promise<guessProps>
 {
