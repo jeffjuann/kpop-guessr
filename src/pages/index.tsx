@@ -60,7 +60,7 @@ export default function Home({ idols, guess_id}: { idols: searchProps[], guess_i
         refreshPage();
       }
     }
-  }, []);
+  }, [guesses]);
 
   async function handleSubmit(search_id: ObjectId)
   {

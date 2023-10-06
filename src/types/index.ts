@@ -6,7 +6,6 @@ export type idolProps =
     name: string,
     group: string,
     birth: string,
-    zodiac: string,
     agency: string,
     generation: string,
     nationality: string

@@ -25,7 +25,7 @@ export default function Guess({ guesses }:{ guesses: guessProps[]})
               )
             }
           } 
-          ) : <h2>Start Guessing</h2>
+          ) : <h2 style={{fontWeight: 400}}>Start Guessing</h2>
         }
       </div>
     </div>

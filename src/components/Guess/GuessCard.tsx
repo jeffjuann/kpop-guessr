@@ -18,6 +18,10 @@ function Clue({ category, value, isMatch }: { category: string, value: string, i
 
 export default function Card({ guess, animated = false }: { guess: guessProps, animated?: boolean})
 {
+  const age = getAge(guess.idol.birth);
+
+  const birthMonth = getMonth(guess.idol.birth);
+
   return (
     <div className={`${cardStyles.container}`}>
       <h3>{guess.idol.name}</h3>
@@ -25,10 +29,29 @@ export default function Card({ guess, animated = false }: { guess: guessProps, a
         <Clue category={"GEN"} value={guess.idol.generation} isMatch={guess.isMatch.includes("Generation")}/>
         <Clue category={"AGN"} value={guess.idol.agency} isMatch={guess.isMatch.includes("Agency")}/>
         <Clue category={"GRP"} value={guess.idol.group} isMatch={guess.isMatch.includes("Group")}/>
-        <Clue category={"BIR"} value={guess.idol.birth} isMatch={guess.isMatch.includes("Birth")}/>
-        <Clue category={"AGE"} value={guess.idol.zodiac} isMatch={guess.isMatch.includes("Zodiac")}/>
+        <Clue category={"BIR"} value={birthMonth} isMatch={guess.isMatch.includes("Birth")}/>
+        <Clue category={"AGE"} value={age} isMatch={guess.isMatch.includes("Age")}/>
         <Clue category={"NAT"} value={guess.idol.nationality} isMatch={guess.isMatch.includes("Nationality")}/>
       </div>
     </div>
   )
+}
+
+function getMonth(dateString: string): string
+{
+  const date = new Date(dateString);
+  const month = date.toLocaleString('default', { month: 'short' });
+  return month.toUpperCase();
+}
+
+function getAge(dateString: string): string
+{
+  var today = new Date();
+  var birthDate = new Date(dateString);
+  var age = today.getFullYear() - birthDate.getFullYear();
+  var m = today.getMonth() - birthDate.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+  }
+  return age.toString();
 }

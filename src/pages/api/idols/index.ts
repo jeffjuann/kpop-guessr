@@ -25,6 +25,18 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) =>
 			res.status(200).json(err);
 		});
 	}
+	else if(req.method === 'POST')
+	{
+		// res.status(200).json(req.body);
+		return client.db("kpop-guessr").collection("idols").insertMany(req.body)
+		.then((list: any) =>
+		{
+			res.status(200).json(list);
+		}).catch((err) =>
+		{
+			res.status(200).json(err);
+		});
+	}
 }
 
 export default handler;

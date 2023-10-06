@@ -50,3 +50,12 @@
 {
   background-color: #3c5880;
 }
+
+@media only screen and (max-width:500px)
+{
+    .container
+    {
+      width: 100vw;
+      background: none;
+    }
+}
