@@ -40,7 +40,7 @@ function refreshPage()
 
 function win()
 {
-  alert("Congratulations, You Win!!!");
+  alert("Congratulations, You Win!!!!");
 }
 
 export default function Home({ idols, guess_id }: { idols: searchProps[], guess_id: ObjectId })
