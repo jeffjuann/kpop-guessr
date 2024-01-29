@@ -14,6 +14,12 @@ const nextConfig = {
         ]
       }
     ]
+  },
+  experimental: {
+    serverActions: {
+      allowedOrigins: [process.env.NEXT_PUBLIC_URL],
+      allowedForwardedHosts: [process.env.NEXT_PUBLIC_URL],
+    }
   }
 };
 
