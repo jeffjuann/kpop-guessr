@@ -13,6 +13,9 @@ export default function TrpcProvider({ children }: { children: React.ReactNode }
       links: [
         httpBatchLink({
           url: "http://localhost:3000/api/trpc",
+          headers: {
+            'cache-control': `s-maxage=1, stale-while-revalidate=1`,
+          },    
         }),
       ],
     })
