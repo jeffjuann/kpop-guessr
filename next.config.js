@@ -17,8 +17,8 @@ const nextConfig = {
   },
   experimental: {
     serverActions: {
-      allowedOrigins: [process.env.NEXT_PUBLIC_URL],
-      allowedForwardedHosts: [process.env.NEXT_PUBLIC_URL],
+      allowedOrigins: [process.env.NEXT_PUBLIC_URL, 'localhost:3000'],
+      allowedForwardedHosts: [process.env.NEXT_PUBLIC_URL, 'localhost'],
     }
   }
 };
