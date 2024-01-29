@@ -1,8 +1,8 @@
 import { ObjectId } from "mongodb"
 
-export type idolProps = 
+export type IdolProps = 
 {
-    _id: ObjectId | null,
+    _id: ObjectId | string | null,
     name: string,
     group: string,
     birth: string,
@@ -11,15 +11,15 @@ export type idolProps =
     nationality: string
 }
 
-export type guessProps =
+export type GuessProps =
 {
-    idol: idolProps,
+    idol: IdolProps,
     isMatch: string[],
 }
 
-export type searchProps =
+export type SearchProps =
 {
-    _id: ObjectId | null,
+    _id: string | ObjectId | null,
     name: string,
     group: string
 }
