@@ -15,7 +15,7 @@ const handler = (req: Request) =>
       const allOk = errors.length === 0;
       // checking we're doing a query request
       const isQuery = type === 'query';
-      if (ctx?.res && allPublic && allOk && isQuery)
+      if (allPublic && allOk && isQuery)
       {
         return {
           headers: {
