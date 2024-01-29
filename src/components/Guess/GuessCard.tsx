@@ -1,5 +1,5 @@
-import cardStyles from '@/styles/Guess/Card.module.css';
-import { guessProps } from '@/types';
+import cardStyles from '@/styles/Card.module.css';
+import { GuessProps } from '@/types';
 import { Textfit } from 'react-textfit';
 
 function Clue({ category, value, isMatch }: { category: string, value: string | number, isMatch: boolean})
@@ -16,7 +16,7 @@ function Clue({ category, value, isMatch }: { category: string, value: string | 
   )
 }
 
-export default function Card({ guess, animated = false }: { guess: guessProps, animated?: boolean})
+export default function GuessItem({ guess, animated = false }: { guess: GuessProps, animated?: boolean})
 {
   const age = getAge(guess.idol.birth);
 

@@ -1,16 +1,16 @@
-import guessStyles from '@/styles/Guess/Guess.module.css';
+import guessStyles from '@/styles/Guess.module.css';
 import Card from './GuessCard';
-import { guessProps } from '@/types';
+import { GuessProps } from '@/types';
 
 
 
-export default function Guess({ guesses }:{ guesses: guessProps[]})
+export default function Guess({ guesses }:{ guesses: GuessProps[]})
 {
   return (
     <div className={`${guessStyles.container}`}>
       <h2>Your Guesses</h2>
       <div className={`${guessStyles.guessList}`}>
-        { guesses.length !== 0 ? guesses.map((guessItem: guessProps, index: number) =>
+        { guesses.length !== 0 ? guesses.map((guessItem: GuessProps, index: number) =>
           {
             if(index === 0)
             {
