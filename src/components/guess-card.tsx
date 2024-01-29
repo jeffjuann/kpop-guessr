@@ -6,7 +6,7 @@ export default function GuessItem({ guess, animated = false }: { guess: GuessPro
 {
   return (
     <div className="flex flex-col gap-3 items-center">
-      <h3 className='font-medium text-xl'>{guess.idol.name}</h3>
+      <h3 className='font-semibold text-xl'>{guess.idol.name}</h3>
       <div className="flex flex-row gap-1">
         <ClueItem category="GEN" value={guess.idol.generation} isMatch={guess.isMatch.includes("Generation")}/>
         <ClueItem category="AGN" value={guess.idol.agency} isMatch={guess.isMatch.includes("Agency")}/>

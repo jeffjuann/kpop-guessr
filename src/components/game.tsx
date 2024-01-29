@@ -36,12 +36,12 @@ export default function Game({ idols, answerId }: { idols: SearchProps[], answer
   };
 
   return (
-    <div className="flex flex-row gap-2">
-      <Card className="w-[400px]">
+    <div className="w-full flex flex-col-reverse md:flex-row gap-2 md:justify-center">
+      <Card className=" w-full md:w-[400px]">
         <CardHeader>
           <CardTitle className="text-center scroll-m-20 text-3xl font-semibold tracking-tight first:mt-0">Your Guess</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="flex flex-col gap-2">
         { guess.length !== 0 ? guess.map((guessItem: GuessProps, index: number) =>
           {
             if(index === 0)
@@ -61,7 +61,7 @@ export default function Game({ idols, answerId }: { idols: SearchProps[], answer
         }
         </CardContent>
       </Card>
-      <Card className="p-4 h-fit w-64">
+      <Card className="p-4 h-fit w-full md:w-64">
         <Select
           value={selectValue}
           disabled={selectIsDisabled}
