@@ -15,7 +15,7 @@ export default async function Page()
       <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl text-white">
         Idol List
       </h1>
-      <Card className="bg-white rounded-md p-4">
+      <Card className="bg-white rounded-md p-4 overflow-auto">
         <DataTable data={idols.sort((a, b) => a.name.localeCompare(b.name))}/>
       </Card>
     </div>

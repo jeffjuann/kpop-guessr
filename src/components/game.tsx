@@ -7,24 +7,24 @@ import { Select } from "antd";
 import { ObjectId } from "mongodb";
 import { useState } from "react";
 import GuessItem from "./guess-card";
-import { trpc } from "@/trpc/client";
+// import { trpc } from "@/trpc/client";
+import { checkGuess } from "@/lib/check-guess";
 
 export default function Game({ idols, answerId }: { idols: SearchProps[], answerId: ObjectId})
 {
   const [selectValue, setSelectValue] = useState<string | null>(null);
   const [selectIsDisabled, setSelectIsDisabled] = useState<boolean>(false);
   const [guess, setGuess] = useState<GuessProps[]>([]);
-  const checkGuess = trpc.checkGuess.useMutation();
-  
+
   const onSelect = async (value: string) => 
   {
     setSelectValue(value);
     setSelectIsDisabled(true);
-    const res = await checkGuess.mutateAsync({ guessId: value, answerId: answerId.toString() });
+    const res = await checkGuess(value, answerId);
     console.log(res);
     if(res === null) return;
-    setGuess([res, ...guess]);
-    if(res.idol._id === answerId.toString())
+    setGuess((guess: GuessProps[]) => [res, ...guess]);
+    if(res.idol._id && res.idol._id.toString() === answerId.toString())
     {
       alert("You Win!");
     } 

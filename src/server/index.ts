@@ -26,8 +26,13 @@ export const appRouter = router({
       return await client.db("kpop-guessr").collection("idols").aggregate([{ $sample: { size: 1 } }]).project({ _id: 1}).toArray()
     }),
   checkGuess: procedure
-    .input(z.object({ guessId: z.string(), answerId: z.string()}))
+    .input(
+      z.object({ 
+        guessId: z.string(), 
+        answerId: z.string()
+      }))
     .mutation(async ({ input }) => {
+      console.log(input);
       const guessIdol = await client.db("kpop-guessr").collection("idols").findOne({ _id: new ObjectId(input.guessId)});
       const answerIdol = await client.db("kpop-guessr").collection("idols").findOne({ _id: new ObjectId(input.answerId)});
       if(guessIdol === null || answerIdol === null) return null;
