@@ -1,6 +1,6 @@
 import { GuessProps, IdolProps } from "@/types";
 
-export function checkMatch(guessIdol: IdolProps, searchIdol: IdolProps): GuessProps
+export function checkMatch(guessIdol: IdolProps | any, searchIdol: IdolProps | any): GuessProps
 {
 	let isMatch: string[] = [];
 	if(guessIdol.generation === searchIdol.generation)  	 isMatch.push('Generation');
@@ -10,7 +10,7 @@ export function checkMatch(guessIdol: IdolProps, searchIdol: IdolProps): GuessPr
 	if(getAge(guessIdol.birth) === getAge(searchIdol.birth))	 isMatch.push('Age');
 	if(guessIdol.nationality === searchIdol.nationality) 	 isMatch.push('Nationality');
 	const result: GuessProps = {
-		idol: searchIdol, 
+		idol: guessIdol, 
 		isMatch: isMatch
 	}
 	return result;

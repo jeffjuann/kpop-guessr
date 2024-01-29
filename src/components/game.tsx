@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { filterOption, formatOptionItems } from "@/lib/utils";
-import { GuessProps, IdolProps, SearchProps } from "@/types";
+import { GuessProps, SearchProps } from "@/types";
 import { Select } from "antd";
 import { ObjectId } from "mongodb";
 import { useState } from "react";
@@ -11,14 +11,29 @@ import { trpc } from "@/trpc/client";
 
 export default function Game({ idols, answerId }: { idols: SearchProps[], answerId: ObjectId})
 {
+  const [selectValue, setSelectValue] = useState<string | null>(null);
   const [selectIsDisabled, setSelectIsDisabled] = useState<boolean>(false);
   const [guess, setGuess] = useState<GuessProps[]>([]);
+  const checkGuess = trpc.checkGuess.useMutation();
   
-  const onSelect = (value: string) => 
+  const onSelect = async (value: string) => 
   {
+    setSelectValue(value);
     setSelectIsDisabled(true);
-    // const res = trpc.checkGuess.useQuery({ guessId: value, answerId: answerId.toString() });
-    setSelectIsDisabled(false);
+    const res = await checkGuess.mutateAsync({ guessId: value, answerId: answerId.toString() });
+    console.log(res);
+    if(res === null) return;
+    setGuess([res, ...guess]);
+    if(res.idol._id === answerId.toString())
+    {
+      alert("You Win!");
+      console.log("you win");
+    } 
+    else 
+    {
+      setSelectIsDisabled(false);
+      setSelectValue(null);
+    }
   };
 
   return (
@@ -43,12 +58,13 @@ export default function Game({ idols, answerId }: { idols: SearchProps[], answer
               )
             }
           } 
-          ) : <h2>Make a Random Guess</h2>
+          ) : <h2 className="scroll-m-20 text-2xl font-light italic tracking-tight text-center">Start Guessing</h2>
         }
         </CardContent>
       </Card>
       <Card className="p-4 h-fit w-64">
         <Select
+          value={selectValue}
           disabled={selectIsDisabled}
           className="w-full"
           showSearch

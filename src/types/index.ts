@@ -2,7 +2,7 @@ import { ObjectId } from "mongodb"
 
 export type IdolProps = 
 {
-    _id: ObjectId | null,
+    _id: ObjectId | string | null,
     name: string,
     group: string,
     birth: string,
@@ -19,7 +19,7 @@ export type GuessProps =
 
 export type SearchProps =
 {
-    _id: ObjectId | null,
+    _id: string | ObjectId | null,
     name: string,
     group: string
 }
