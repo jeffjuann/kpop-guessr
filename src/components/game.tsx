@@ -6,7 +6,7 @@ import { GuessProps, SearchProps } from "@/types";
 import { Select } from "antd";
 import { ObjectId } from "mongodb";
 import { useState } from "react";
-import GuessItem from "./Guess/GuessCard";
+import GuessItem from "./guess-card";
 import { trpc } from "@/trpc/client";
 
 export default function Game({ idols, answerId }: { idols: SearchProps[], answerId: ObjectId})
@@ -27,7 +27,6 @@ export default function Game({ idols, answerId }: { idols: SearchProps[], answer
     if(res.idol._id === answerId.toString())
     {
       alert("You Win!");
-      console.log("you win");
     } 
     else 
     {

@@ -16,7 +16,7 @@ export default function RootLayout({ children }: { children: ReactNode })
 {
   return (
     <html lang="en">
-      <body className={cn(inter.className, 'w-full h-full p-6', 'grid place-items-center', 'bg-newjeans bg-fixed')}>
+      <body className={cn(inter.className, 'w-full min-h-dvh p-6', 'grid place-items-center', 'bg-newjeans bg-fixed')}>
         <TrpcProvider>
             {children}
         </TrpcProvider>

@@ -10,11 +10,11 @@ export default async function Page()
   const answerId: ObjectId = (await serverClient.getAnswerId())[0]._id; 
 
   return (
-    <div className="p-12 flex flex-col gap-12 items-center">
+    <div className="w-full h-full p-12 flex flex-col gap-12 items-center justify-start">
       <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl text-white">
         K-POP Guessr
       </h1>
-      <Game idols={idols} answerId={answerId}/>
+      <Game idols={idols.sort((a, b) => a.name.localeCompare(b.name))} answerId={answerId}/>
     </div>
   )
 }

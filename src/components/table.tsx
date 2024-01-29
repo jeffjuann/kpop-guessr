@@ -67,7 +67,17 @@ export const columns: ColumnDef<IdolProps>[] = [
   },
   {
     accessorKey: "generation",
-    header: () => <div className="w-full">Generation</div>,
+    header: ({ column }) => {
+      return (
+        <Button
+          className="w-full"
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Generation
+          <CaretSortIcon className="ml-2 h-4 w-4" />
+        </Button>
+      )},
     cell: ({ row }) => <div>{row.getValue("generation")}</div>,
   },
   {
@@ -81,6 +91,7 @@ export function DataTable({ data }: { data: IdolProps[] })
 {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [filter, setFilter] = useState<string>("");
 
   const table = useReactTable({
     data,
@@ -102,10 +113,12 @@ export function DataTable({ data }: { data: IdolProps[] })
       <div className="flex items-center py-4">
         <Input
           placeholder="Search ..."
-          value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
+          value={filter}
           onChange={(event) =>
-            table.getColumn("name")?.setFilterValue(event.target.value)
-          }
+          {
+            setFilter(event.target.value);
+            table.setGlobalFilter(event.target.value);
+          }}
           className="max-w-sm"
         />
       </div>

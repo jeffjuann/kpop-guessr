@@ -16,14 +16,14 @@ export function checkMatch(guessIdol: IdolProps | any, searchIdol: IdolProps | a
 	return result;
 }
 
-function getMonth(dateString: string): string
+export function getMonth(dateString: string): string
 {
   const date = new Date(dateString);
   const month = date.toLocaleString('default', { month: 'short' });
   return month.toUpperCase();
 }
 
-function getAge(dateString: string): string
+export function getAge(dateString: string): string
 {
   var today = new Date();
   var birthDate = new Date(dateString);
