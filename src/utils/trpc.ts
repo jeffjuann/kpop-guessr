@@ -32,7 +32,7 @@ export const trpc = createTRPCNext<AppRouter>(
     }
     return {
       headers: {
-        'cache-control': `s-maxage=1, stale-while-revalidate=1`,
+        'Cache-Control': `no-cache, no-store, must-revalidate`,
       },
     };
   },
