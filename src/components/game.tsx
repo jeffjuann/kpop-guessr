@@ -9,6 +9,7 @@ import { useState } from "react";
 import GuessItem from "./guess-card";
 import { checkGuess } from "@/lib/check-guess";
 import { revalidatePath } from "next/cache";
+import { useRouter } from "next/navigation";
 
 export default function Game({ idols, answerId }: { idols: SearchProps[], answerId: ObjectId})
 {
@@ -18,6 +19,7 @@ export default function Game({ idols, answerId }: { idols: SearchProps[], answer
 
   const onSelect = async (value: string) => 
   {
+    const router = useRouter();
     setSelectValue(value);
     setSelectIsDisabled(true);
     const res = await checkGuess(value, answerId);
@@ -27,8 +29,8 @@ export default function Game({ idols, answerId }: { idols: SearchProps[], answer
     if(res.idol._id && res.idol._id.toString() === answerId.toString())
     {
       alert("You Win!");
-      revalidatePath('/', 'layout');
-      location.reload();
+      revalidatePath('/', 'page');
+      router.replace('/');
     } 
     else 
     {
