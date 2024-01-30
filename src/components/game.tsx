@@ -8,12 +8,11 @@ import { ObjectId } from "mongodb";
 import { useState } from "react";
 import GuessItem from "./guess-card";
 import { checkGuess, revalidatePage } from "@/lib/check-guess";
-import { revalidatePath } from "next/cache";
-import { useRouter } from "next/navigation";
+import WinDialog from "./win-dialog";
 
 export default function Game({ idols, answerId }: { idols: SearchProps[], answerId: ObjectId})
 {
-  const router = useRouter();
+  const [winDialogIsOpen, setWinDialogIsOpen] = useState<boolean>(false);
   const [selectValue, setSelectValue] = useState<string | null>(null);
   const [selectIsDisabled, setSelectIsDisabled] = useState<boolean>(false);
   const [guess, setGuess] = useState<GuessProps[]>([]);
@@ -28,9 +27,7 @@ export default function Game({ idols, answerId }: { idols: SearchProps[], answer
     setGuess((guess: GuessProps[]) => [res, ...guess]);
     if(res.idol._id && res.idol._id.toString() === answerId.toString())
     {
-      await revalidatePage();
-      alert("You Win!");
-      await revalidatePage();
+      setWinDialogIsOpen(true);
     } 
     else 
     {
@@ -41,6 +38,7 @@ export default function Game({ idols, answerId }: { idols: SearchProps[], answer
 
   return (
     <div className="w-full flex flex-col-reverse md:flex-row gap-2 md:justify-center">
+      <WinDialog isOpen={winDialogIsOpen} guessCount={guess.length} />
       <Card className=" w-full md:w-[400px]">
         <CardHeader>
           <CardTitle className="text-center scroll-m-20 text-3xl font-semibold tracking-tight first:mt-0">Your Guess</CardTitle>
