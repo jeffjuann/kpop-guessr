@@ -2,13 +2,18 @@ import { revalidatePath } from "next/cache";
 import { Dialog, DialogContent, DialogFooter } from "./ui/dialog";
 import { revalidatePage } from "@/lib/check-guess";
 import { Button } from "./ui/button";
+import { set } from "zod";
+import { useState } from "react";
 
 export default function WinDialog({ isOpen, guessCount }: { isOpen: boolean, guessCount: number })
 {
+  const [btnDisabled, setBtnDisabled] = useState<boolean>(false);
+
   async function playAgain()
   {
-      await revalidatePage();
-      location.reload();
+    setBtnDisabled(true);
+    await revalidatePage();
+    location.reload();
   }
 
   return (
