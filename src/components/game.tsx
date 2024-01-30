@@ -8,11 +8,10 @@ import { ObjectId } from "mongodb";
 import { useState } from "react";
 import GuessItem from "./guess-card";
 import { checkGuess } from "@/lib/check-guess";
-import { useRouter } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 export default function Game({ idols, answerId }: { idols: SearchProps[], answerId: ObjectId})
 {
-  const router = useRouter();
   const [selectValue, setSelectValue] = useState<string | null>(null);
   const [selectIsDisabled, setSelectIsDisabled] = useState<boolean>(false);
   const [guess, setGuess] = useState<GuessProps[]>([]);
@@ -28,6 +27,8 @@ export default function Game({ idols, answerId }: { idols: SearchProps[], answer
     if(res.idol._id && res.idol._id.toString() === answerId.toString())
     {
       alert("You Win!");
+      revalidatePath('/', 'layout');
+      location.reload();
     } 
     else 
     {
