@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { procedure, router } from './trpc';
 import { MongoClient, ObjectId, ServerApiVersion } from 'mongodb';
 import { checkMatch } from '@/lib/game';
-import { GuessProps } from '@/types';
+import * as trpcNext from '@trpc/server/adapters/next';
 
 const client = new MongoClient(process.env.NEXT_PUBLIC_DB_URI ?? '', {
   serverApi: {

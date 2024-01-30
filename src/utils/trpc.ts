@@ -20,5 +20,20 @@ export const trpc = createTRPCNext<AppRouter>(
       ],
     };
   },
-  ssr: false,
+  ssr: true,
+  responseMeta(opts)
+  {
+    const { clientErrors } = opts;
+    if (clientErrors.length)
+    {
+      return {
+        status: clientErrors[0].data?.httpStatus ?? 500,
+      };
+    }
+    return {
+      headers: {
+        'Cache-Control': `no-cache, no-store, must-revalidate`,
+      },
+    };
+  },
 });

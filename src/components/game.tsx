@@ -7,11 +7,13 @@ import { Select } from "antd";
 import { ObjectId } from "mongodb";
 import { useState } from "react";
 import GuessItem from "./guess-card";
-// import { trpc } from "@/trpc/client";
-import { checkGuess } from "@/lib/check-guess";
+import { checkGuess, revalidatePage } from "@/lib/check-guess";
+import { revalidatePath } from "next/cache";
+import { useRouter } from "next/navigation";
 
 export default function Game({ idols, answerId }: { idols: SearchProps[], answerId: ObjectId})
 {
+  const router = useRouter();
   const [selectValue, setSelectValue] = useState<string | null>(null);
   const [selectIsDisabled, setSelectIsDisabled] = useState<boolean>(false);
   const [guess, setGuess] = useState<GuessProps[]>([]);
@@ -27,6 +29,7 @@ export default function Game({ idols, answerId }: { idols: SearchProps[], answer
     if(res.idol._id && res.idol._id.toString() === answerId.toString())
     {
       alert("You Win!");
+      await revalidatePage();
     } 
     else 
     {
