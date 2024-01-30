@@ -7,19 +7,19 @@ import { Select } from "antd";
 import { ObjectId } from "mongodb";
 import { useState } from "react";
 import GuessItem from "./guess-card";
-import { checkGuess } from "@/lib/check-guess";
+import { checkGuess, revalidatePage } from "@/lib/check-guess";
 import { revalidatePath } from "next/cache";
 import { useRouter } from "next/navigation";
 
 export default function Game({ idols, answerId }: { idols: SearchProps[], answerId: ObjectId})
 {
+  const router = useRouter();
   const [selectValue, setSelectValue] = useState<string | null>(null);
   const [selectIsDisabled, setSelectIsDisabled] = useState<boolean>(false);
   const [guess, setGuess] = useState<GuessProps[]>([]);
 
   const onSelect = async (value: string) => 
   {
-    const router = useRouter();
     setSelectValue(value);
     setSelectIsDisabled(true);
     const res = await checkGuess(value, answerId);
@@ -29,8 +29,7 @@ export default function Game({ idols, answerId }: { idols: SearchProps[], answer
     if(res.idol._id && res.idol._id.toString() === answerId.toString())
     {
       alert("You Win!");
-      revalidatePath('/', 'page');
-      router.replace('/');
+      await revalidatePage();
     } 
     else 
     {
