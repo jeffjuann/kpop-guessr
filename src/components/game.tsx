@@ -28,6 +28,7 @@ export default function Game({ idols, answerId }: { idols: SearchProps[], answer
     setGuess((guess: GuessProps[]) => [res, ...guess]);
     if(res.idol._id && res.idol._id.toString() === answerId.toString())
     {
+      await revalidatePage();
       alert("You Win!");
       await revalidatePage();
     } 
