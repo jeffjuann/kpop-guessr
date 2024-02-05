@@ -21,3 +21,6 @@ Welcome to KPOP-GUESSR. KPOP-GUESSR is a web-based guessing game built on Next.J
 
 ![HowToPlay](screenshots/Help.jpg)
 
+## License
+
+Licensed under the [MIT license](https://github.com/jeffjuann/kpop-guessr/blob/main/LICENSE).
